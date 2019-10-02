@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace AtataTest.Pages
 {
-    using _ = HomeTUTPage;
-    //[Url("www.tut.by")]
-    public class HomeTUTPage : Page<_>
+    using _ = TUTHomePage;
+    [Url("")]
+    public class TUTHomePage : Page<_>
     {
         [FindByXPath("div/a[@class='enter']")]
         public Link<_> Enter { get; set; }
@@ -22,12 +22,13 @@ namespace AtataTest.Pages
 
         [FindByXPath("*[contains(@class, 'button')]", OuterXPath = "//form[@class='auth-form']//")]
         public Button<_> EnterAgain { get; set; }
-        
-        public Control<_> LoggedIn { get; set; }
-        
-        //public Control<_> ResponseCode { get; set; }
 
-        //[FindById("search_from_str")]
-        //public Input<string, _> Inp { get; set; }
+        public Control<_> ResponseCode { get; set; }
+
+        public Control<_> LoggedIn { get; set; }
+
+        [FindByLabel("Запомнить")]
+        public CheckBox<_> RememberMe { get; private set; }
+
     }
 }

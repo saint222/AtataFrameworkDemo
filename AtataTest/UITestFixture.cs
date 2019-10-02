@@ -25,17 +25,41 @@ namespace AtataTest
         }
 
         [Test]
-        public void TutLogin()
+        public void Tut_Login_Positive()
         {
-            Go.To<HomeTUTPage>()
+            Go.To<TUTHomePage>()
+                .Enter.Click()
+                .Login.Set("test@gmail.com")
+                .Password.Set("Test!2")
+                .Wait(5)
+                .RememberMe.Click() //checkbox "Запомнить меня"
+                .Wait(5)
+                .EnterAgain.Click()
+                .ResponseCode.Content.Should.Contain("200")           
+                .LoggedIn.Content.Should.Contain("Saint Saint")
+                .Wait(5);
+        }
+
+        [Test]
+        public void Tut_Login_Negative()
+        {
+            Go.To<TUTHomePage>()
                 .Enter.Click()
                 .Login.Set("saint12maloj@gmail.com")
-                .Password.Set("Iambored12")
+                .Password.Set("Iambored123")
                 .EnterAgain.Click()
-                //.ResponseCode.Content.Should.Contain("200")                
-                //.Inp.Set("новости")
-                .LoggedIn.Content.Should.Contain("Saint Saint")
-                .Wait(10);
+                //.ResponseCode.Content.Should.Contain("401")
+                .LoggedIn.Content.Should.Not.Contain("Saint Saint")
+                .Wait(5);
+        }
+
+        [Test]
+        public void Tut_Afisha_Positive()
+        {
+            Go.To<AfishaTUTPage>()
+                .CinemaClick.Click()
+                .ResponseCode.Content.Should.Contain("200")
+                .Wait(5);
         }
 
         [TearDown]
